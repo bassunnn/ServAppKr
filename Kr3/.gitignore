@@ -21,7 +21,6 @@ ENV/
 *.swp
 *.swo
 *~
-.qwen/
 
 # Environment
 .env.local
