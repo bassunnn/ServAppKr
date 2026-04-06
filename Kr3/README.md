@@ -107,7 +107,7 @@ curl http://127.0.0.1:8000/admin-resource \
 - `admin` — присваивается автоматически при username `admin`
 - `user` — все остальные пользователи
 
-## Конфигурация (.env)
+## Коонфигурация (.env)
 
 ```env
 MODE=DEV                    # DEV или PROD
