@@ -13,10 +13,10 @@ app = FastAPI(title="Контрольная работа №2")
 SECRET_KEY = "my-secret-key-for-control-work"
 signer = URLSafeSerializer(SECRET_KEY)
 
-# Хранилище сессий для задания 5.1
+// Задача 5.1: Хранилище сессий
 sessions = {}
 
-# Список образцов продуктов для задания 3.2
+// Задача 3.2: Список образцов продуктов
 SAMPLE_PRODUCTS = [
     {"product_id": 1, "name": "Ноутбук HP", "category": "Электроника", "price": 50000},
     {"product_id": 2, "name": "Смартфон Samsung", "category": "Электроника", "price": 30000},
@@ -31,18 +31,14 @@ SAMPLE_PRODUCTS = [
 ]
 
 
-# ============================================================
-# Задание 3.1 – POST /create_user
-# ============================================================
+// Задача 3.1
 @app.post("/create_user")
 async def create_user(user: UserCreate):
     """Создание пользователя с валидацией данных"""
     return user.dict()
 
 
-# ============================================================
-# Задание 3.2 – GET /products/search и GET /product/{product_id}
-# ============================================================
+// Задача 3.2
 @app.get("/products/search")
 async def search_products(
     keyword: str,
@@ -75,9 +71,7 @@ async def get_product(product_id: int):
     raise HTTPException(status_code=404, detail="Product not found")
 
 
-# ============================================================
-# Задание 5.1 – Cookie-based аутентификация (простая)
-# ============================================================
+// Задача 5.1
 @app.post("/login_v1")
 async def login_v1(login_data: LoginRequest, response: Response):
     """Простая cookie-аутентификация (Задание 5.1)"""
@@ -105,9 +99,7 @@ async def get_user(request: Request, response: Response):
     return {"message": "Unauthorized"}
 
 
-# ============================================================
-# Задание 5.2 – Подписанные cookie с itsdangerous
-# ============================================================
+// Задача 5.2
 @app.post("/login_v2")
 async def login_v2(login_data: LoginRequest, response: Response):
     """Аутентификация с подписанными cookie (Задание 5.2)"""
@@ -141,9 +133,7 @@ async def profile_v2(request: Request, response: Response):
         return {"message": "Unauthorized"}
 
 
-# ============================================================
-# Задание 5.3 – Динамическое продление сессии
-# ============================================================
+// Задача 5.3
 async def get_current_user(request: Request, response: Response):
     """Dependency для проверки и продления сессии (Задание 5.3)"""
     token = request.cookies.get("session_token")
@@ -203,9 +193,7 @@ async def profile(user=Depends(get_current_user), response: Response = None):
     return {"message": f"Hello {user['user_id']}"}
 
 
-# ============================================================
-# Задание 5.4 – Работа с заголовками (CommonHeaders)
-# ============================================================
+// Задача 5.4
 async def get_headers(
     user_agent: str = Header(..., description="User-Agent браузера"),
     accept_language: str = Header(..., description="Accept-Language заголовок")
@@ -234,6 +222,7 @@ async def get_headers_endpoint(headers: dict = Depends(get_headers)):
     return headers
 
 
+// Задача 5.5
 @app.get("/info")
 async def info_endpoint(headers: dict = Depends(get_headers), response: Response = None):
     """Возвращает заголовки и информацию о сервере (Задание 5.4)"""
