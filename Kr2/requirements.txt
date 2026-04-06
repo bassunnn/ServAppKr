@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+pydantic
+itsdangerous
+python-multipart
+email-validator
